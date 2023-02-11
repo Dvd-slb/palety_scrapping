@@ -11,6 +11,7 @@ class PaletoScrapyItem(scrapy.Item):
     # name = scrapy.Field()
     id = scrapy.Field()
     link = scrapy.Field()
+    down_link = scrapy.Field()
     deadline = scrapy.Field()
     max_bid = scrapy.Field()
     category = scrapy.Field()
@@ -19,3 +20,6 @@ class PaletoScrapyItem(scrapy.Item):
     most_items_number = scrapy.Field()
     total_q = scrapy.Field()
     total_price = scrapy.Field()
+
+# class DetailScrapyItem(scrapy.Item):
+#     down_link = scrapy.Field()
