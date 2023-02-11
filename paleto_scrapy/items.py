@@ -9,10 +9,10 @@ import scrapy
 class PaletoScrapyItem(scrapy.Item):
     # define the fields for your item here like:
     # name = scrapy.Field()
-    id = scrapy.Field()
+    name = scrapy.Field()
     link = scrapy.Field()
     down_link = scrapy.Field()
-    deadline = scrapy.Field()
+    dead_line = scrapy.Field()
     max_bid = scrapy.Field()
     category = scrapy.Field()
     most_expensive_item = scrapy.Field()

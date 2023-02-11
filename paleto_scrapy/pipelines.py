@@ -22,7 +22,7 @@ class PaletoScrapyPipeline:
 
     def create_table(self):
         self.cursor = ("""CREATE TABLE IF NOT EXISTS items (
-                        id TEXT,
+                        name TEXT,
                         link TEXT""")
 
     def process_item(self, item, spider):
