@@ -19,7 +19,7 @@ print(len(cursor.fetchall()))
 #     url = f[0]
 #     name = f[1]
 #     file = requests.get(url)
-#     with open(f"box_description/{name}.xlsx", "wb") as box_details:
+#     with open(f"../box_description/{name}.xlsx", "wb") as box_details:
 #         box_details.write(file.content)
 
 # cursor.execute("SELECT * FROM items WHERE name=?", ("S1955", ))
