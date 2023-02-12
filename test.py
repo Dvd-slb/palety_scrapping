@@ -22,7 +22,8 @@ print(len(cursor.fetchall()))
 #     with open(f"../box_description/{name}.xlsx", "wb") as box_details:
 #         box_details.write(file.content)
 
-# cursor.execute("SELECT * FROM items WHERE name=?", ("S1955", ))
+# cursor.execute("SELECT dead_line FROM items")
+# print(type(cursor.fetchone()[0]))
 # print(cursor.fetchall())
 
 # cursor.execute("SELECT down_link FROM items")

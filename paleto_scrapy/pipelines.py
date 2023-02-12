@@ -53,11 +53,7 @@ class PaletoScrapyPipeline:
                     "most_expensive_item_price": False, "most_expensive_item_desc": False, "most_items_q": False,
                     "most_items_price": False, "most_items_desc": False, "total_q": False, "total_price": False})
 
-
         self.connection.commit()
-
-    # def download_file(self):
-    #     self.cursor.execute("SELECT down_link from items")
 
 
 # _______________ POSTUP NA STAŽENÍ XLSX SOUBORU S DETAILY JEDNOTLIVÝCH PALET ________________
@@ -66,7 +62,7 @@ class PaletoScrapyPipeline:
 #     url = f[0]
 #     name = f[1]
 #     file = requests.get(url)
-#     with open(f"box_description/{name}.xlsx", "wb") as box_details:
+#     with open(f"../box_description/{name}.xlsx", "wb") as box_details:
 #         box_details.write(file.content)
 
 

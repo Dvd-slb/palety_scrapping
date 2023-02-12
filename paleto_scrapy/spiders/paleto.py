@@ -49,10 +49,10 @@ class PaletoSpider(scrapy.Spider):
                 if date_info[1] == month:
                     date_info[1] = f"{index}."
                 index += 1
-            dead_line = f"{date_info[0]} {date_info[1]} {date_info[2]} {date_info[3]}:00"
+            # dead_line = f"{date_info[0]} {date_info[1]} {date_info[2]} {date_info[3]}:00"
 
-            # dead_line_str = f"{date_info[0]} {date_info[1]} {date_info[2]} {date_info[3]}"
-            # dead_line = datetime.strptime(dead_line_str, date_format)
+            dead_line_str = f"{date_info[0]} {date_info[1]} {date_info[2]} {date_info[3]}:00"
+            dead_line = datetime.strptime(dead_line_str, date_format)
 
         except IndexError:
             date_info = response.css(".uwa_auction_product_end_time::text").getall()[1].split()
@@ -60,10 +60,10 @@ class PaletoSpider(scrapy.Spider):
                 if date_info[1] == month:
                     date_info[1] = f"{index}."
                 index += 1
-            dead_line = f"{date_info[0]} {date_info[1]} {date_info[2]} {date_info[3]}:00"
+            # dead_line = f"{date_info[0]} {date_info[1]} {date_info[2]} {date_info[3]}:00"
 
-            # dead_line_str = f"{date_info[0]} {date_info[1]} {date_info[2]} {date_info[3]}"
-            # dead_line = datetime.strptime(dead_line_str, date_format)
+            dead_line_str = f"{date_info[0]} {date_info[1]} {date_info[2]} {date_info[3]}:00"
+            dead_line = datetime.strptime(dead_line_str, date_format)
 
         return dead_line
 
