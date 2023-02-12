@@ -1,4 +1,6 @@
+import requests
 import scrapy
+from datetime import datetime
 from ..items import PaletoScrapyItem
 
 
@@ -24,6 +26,13 @@ class PaletoSpider(scrapy.Spider):
         category = self.category_define(response)
         down_link = self.down_link_define(response)
 
+        # file = requests.get(down_link)
+        # with open(f"../../box_description/{name}.xlsx", "wb") as f:
+        #     f.write(file.content)
+
+        # file = requests.get(down_link)
+        # open(f"../../box_description/{name}.xlsx", "wb").write(file.content)
+
         items["name"] = name
         items["link"] = link
         items["dead_line"] = dead_line
@@ -33,12 +42,32 @@ class PaletoSpider(scrapy.Spider):
         yield items
 
     def dead_line_define(self, response):
+        months_cz = ["ledna", "února", "března", "dubna", "května", "června", "července", "srpna", "září", "října",
+                     "listopadu", "prosince"]
+        date_format = "%d. %m. %Y %H:%M"
+        index = 1
         try:
             date_info = response.css("h5.uwa_auction_end_time::text").getall()[1].split()
+            for month in months_cz:
+                if date_info[1] == month:
+                    date_info[1] = f"{index}."
+                index += 1
             dead_line = f"{date_info[0]} {date_info[1]} {date_info[2]} {date_info[3]}"
+
+            # dead_line_str = f"{date_info[0]} {date_info[1]} {date_info[2]} {date_info[3]}"
+            # dead_line = datetime.strptime(dead_line_str, date_format)
+
         except IndexError:
             date_info = response.css(".uwa_auction_product_end_time::text").getall()[1].split()
+            for month in months_cz:
+                if date_info[1] == month:
+                    date_info[1] = f"{index}."
+                index += 1
             dead_line = f"{date_info[0]} {date_info[1]} {date_info[2]} {date_info[3]}"
+
+            # dead_line_str = f"{date_info[0]} {date_info[1]} {date_info[2]} {date_info[3]}"
+            # dead_line = datetime.strptime(dead_line_str, date_format)
+
         return dead_line
 
     def max_bid_define(self, response):

@@ -15,9 +15,10 @@ class PaletoScrapyItem(scrapy.Item):
     dead_line = scrapy.Field()
     max_bid = scrapy.Field()
     category = scrapy.Field()
-    most_expensive_item = scrapy.Field()
-    most_items_definition = scrapy.Field()
-    most_items_number = scrapy.Field()
+    most_expensive_item_q = scrapy.Field()
+    most_expensive_item_price = scrapy.Field()
+    most_items_q = scrapy.Field()
+    most_items_price = scrapy.Field()
     total_q = scrapy.Field()
     total_price = scrapy.Field()
 
