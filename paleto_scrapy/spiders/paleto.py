@@ -44,7 +44,7 @@ class PaletoSpider(scrapy.Spider):
     def dead_line_define(self, response):
         months_cz = ["ledna", "února", "března", "dubna", "května", "června", "července", "srpna", "září", "října",
                      "listopadu", "prosince"]
-        date_format = "%d. %m. %Y %H:%M"
+        date_format = "%d. %m. %Y %H:%M:%S"
         index = 1
         try:
             date_info = response.css("h5.uwa_auction_end_time::text").getall()[1].split()
@@ -52,7 +52,7 @@ class PaletoSpider(scrapy.Spider):
                 if date_info[1] == month:
                     date_info[1] = f"{index}."
                 index += 1
-            dead_line = f"{date_info[0]} {date_info[1]} {date_info[2]} {date_info[3]}"
+            dead_line = f"{date_info[0]} {date_info[1]} {date_info[2]} {date_info[3]}:00"
 
             # dead_line_str = f"{date_info[0]} {date_info[1]} {date_info[2]} {date_info[3]}"
             # dead_line = datetime.strptime(dead_line_str, date_format)
@@ -63,7 +63,7 @@ class PaletoSpider(scrapy.Spider):
                 if date_info[1] == month:
                     date_info[1] = f"{index}."
                 index += 1
-            dead_line = f"{date_info[0]} {date_info[1]} {date_info[2]} {date_info[3]}"
+            dead_line = f"{date_info[0]} {date_info[1]} {date_info[2]} {date_info[3]}:00"
 
             # dead_line_str = f"{date_info[0]} {date_info[1]} {date_info[2]} {date_info[3]}"
             # dead_line = datetime.strptime(dead_line_str, date_format)

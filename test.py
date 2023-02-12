@@ -2,11 +2,13 @@ import sqlite3
 from dateutil.parser import parse
 from datetime import datetime
 
-date_string = '14. 2. 2023 18:44'
-date_format = "%d. %m. %Y %H:%M"
+date_string = '14. 2. 2023 18:44:00'
+date_format = "%d. %m. %Y %H:%M:%S"
 date_parsed = datetime.strptime(date_string, date_format)
 print(date_parsed)
 
+hm = date_parsed.strftime(date_format)
+print(hm)
 
 
 # months_cz = ["ledna", "února", "března", "dubna", "května", "června", "července", "srpna", "září", "října", "listopadu",
