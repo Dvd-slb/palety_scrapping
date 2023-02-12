@@ -2,13 +2,52 @@ import sqlite3
 from dateutil.parser import parse
 from datetime import datetime
 
-date_string = '14. 2. 2023 18:44:00'
-date_format = "%d. %m. %Y %H:%M:%S"
-date_parsed = datetime.strptime(date_string, date_format)
-print(date_parsed)
+# connection = sqlite3.connect("../data.db")
+connection = sqlite3.connect(":memory:")
+cursor = connection.cursor()
 
-hm = date_parsed.strftime(date_format)
-print(hm)
+cursor.execute("""CREATE TABLE IF NOT EXISTS items(
+                        id INTEGER PRIMARY KEY,
+                        name TEXT,
+                        link TEXT,
+                        down_link TEXT,
+                        dead_line DATETIME
+                        )""")
+                        # max_bid INTEGER,
+                        # category TEXT,
+                        # most_expensive_item_q INTEGER,
+                        # most_expensive_item_price INTEGER,
+                        # most_items_q INTEGER,
+                        # most_items_price INTEGER,
+                        # total_q INTEGER,
+                        # total_price INTEGER
+                        # )""")
+
+cursor.execute("PRAGMA table_info(items)")
+column_names = [row[1] for row in cursor.fetchall()]
+print(column_names)
+
+# cursor.execute("ALTER TABLE items ADD name TEXT")
+
+cursor.execute("INSERT INTO items VALUES (:id, :name, :link, :down_link, :dead_line)", {"id": None, "name": "kokot", "link": "neznam",
+                                                                                   "down_link": False, "dead_line": False})
+
+# cursor.execute("INSERT INTO items VALUES (:id, :name, :link, :down_link, :dead_line)", {"id": None, "name": "yep", "link": "vim",
+#                                                                                    "down_link": False, "dead_line": "nikdy"})
+
+cursor.execute("SELECT * FROM items")
+print(cursor.fetchall())
+
+connection.commit()
+connection.close()
+
+# date_string = '14. 2. 2023 18:44:00'
+# date_format = "%d. %m. %Y %H:%M:%S"
+# date_parsed = datetime.strptime(date_string, date_format)
+# print(date_parsed)
+#
+# hm = date_parsed.strftime(date_format)
+# print(hm)
 
 
 # months_cz = ["ledna", "února", "března", "dubna", "května", "června", "července", "srpna", "září", "října", "listopadu",

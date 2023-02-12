@@ -16,12 +16,17 @@ class PaletoScrapyPipeline:
         self.create_table()
 
     def create_connection(self):
-        # self.connection = sqlite3.connect("data.db")
-        self.connection = sqlite3.connect(":memory:")
+        self.connection = sqlite3.connect("../data.db")
+        # self.connection = sqlite3.connect(":memory:")
         self.cursor = self.connection.cursor()
 
     def create_table(self):
-        self.cursor.execute("""CREATE TABLE IF NOT EXISTS items (
+        # id
+        # INTEGER
+        # PRIMARY
+        # KEY,
+
+        self.cursor.execute("""CREATE TABLE IF NOT EXISTS items(
                         id INTEGER PRIMARY KEY,
                         name TEXT,
                         link TEXT,
@@ -36,19 +41,40 @@ class PaletoScrapyPipeline:
                         total_q INTEGER,
                         total_price INTEGER
                         )""")
-        self.connection.commit()
+        # self.connection.commit()
+        # self.connection.close()
+        # self.cursor.execute("INSERT INTO items VALUES (name=?)", ('S1581', ))
+        # self.connection.commit()
 
     def process_item(self, item, spider):
         self.store_db(item)
         return item
 
     def store_db(self, item):
-        self.cursor.execute("SELECT * FROM items WHERE name=?", (item["name"]))
-        if self.cursor.fetchone() is None:
-            print("ok")
-        else:
-            print("not ok")
 
+        self.cursor.execute("SELECT * FROM items WHERE name=?", (item["name"], ))
+        if self.cursor.fetchone() is None:
+            self.cursor.execute("""INSERT INTO items VALUES (:id, :name, :link, :down_link, :dead_line, :max_bid, :category,
+                :most_expensive_item_q, :most_expensive_item_price, :most_items_q, :most_items_price,
+                :total_q, :total_price)""", {"id": None, "name": item["name"], "link": item["link"],
+                "down_link": item["down_link"], "dead_line": item["dead_line"], "max_bid": item["max_bid"],
+                "category": item["category"], "most_expensive_item_q": False, "most_expensive_item_price": False,
+                "most_items_q": False, "most_items_price": False, "total_q": False, "total_price": False})
+        else:
+            print("Tohle tam už jeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee")
+
+        self.cursor.execute("SELECT * FROM items")
+        print(self.cursor.fetchall())
+        # self.cursor.execute("SELECT * FROM items WHERE name=?", (item["name"], ))
+        # if self.cursor.fetchone() is None:
+        #     self.cursor.execute("""INSERT into items VALUES (name=?)""", (item["name"], ))
+        # else:
+        #     print("not ok")
+
+        # self.cursor.execute("SELECT * FROM items WHERE name=?", (item["name"],))
+        # print(self.cursor.fetchall())
+        # self.connection.commit()
+        # self.connection.close()
         self.connection.commit()
 
 
