@@ -7,10 +7,10 @@ connection = sqlite3.connect("../data.db")
 # connection = sqlite3.connect(":memory:")
 cursor = connection.cursor()
 
-# cursor.execute("SELECT * FROM items")
-# print(cursor.fetchall())
-# cursor.execute("SELECT * FROM items")
-# print(len(cursor.fetchall()))
+cursor.execute("SELECT * FROM items")
+print(cursor.fetchall())
+cursor.execute("SELECT * FROM items")
+print(len(cursor.fetchall()))
 
 
 # _________ STAŽENÍ SOUBORU Z LINKU Z DATABÁZE ________
@@ -22,8 +22,8 @@ cursor = connection.cursor()
 #     with open(f"box_description/{name}.xlsx", "wb") as box_details:
 #         box_details.write(file.content)
 
-cursor.execute("SELECT * FROM items WHERE name=?", ("S1955", ))
-print(cursor.fetchall())
+# cursor.execute("SELECT * FROM items WHERE name=?", ("S1955", ))
+# print(cursor.fetchall())
 
 # cursor.execute("SELECT down_link FROM items")
 # down_link = cursor.fetchall()

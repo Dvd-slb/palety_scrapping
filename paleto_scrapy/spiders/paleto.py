@@ -15,6 +15,9 @@ class PaletoSpider(scrapy.Spider):
             link = box.css("h3 a::attr(href)").get()
             yield response.follow(link, callback=self.detail_parse)
 
+        # link = "https://paleto.eu/a/s1955/"
+        # yield response.follow(link, callback=self.detail_parse)
+
     def detail_parse(self, response):
         items = PaletoScrapyItem()
 
@@ -26,12 +29,6 @@ class PaletoSpider(scrapy.Spider):
         category = self.category_define(response)
         down_link = self.down_link_define(response)
 
-        # file = requests.get(down_link)
-        # with open(f"../../box_description/{name}.xlsx", "wb") as f:
-        #     f.write(file.content)
-
-        # file = requests.get(down_link)
-        # open(f"../../box_description/{name}.xlsx", "wb").write(file.content)
 
         items["name"] = name
         items["link"] = link
@@ -93,7 +90,13 @@ class PaletoSpider(scrapy.Spider):
 
     def down_link_define(self, response):
         current_link = response.css("div.wcpoa_attachment a::attr(href)").get()
-        id_to_change = response.css("div.wcpoa_attachment a::attr(href)").re("id=....")[0][3:]
-        new_id = str(int(response.css("div.wcpoa_attachment a::attr(href)").re("id=....")[0][3:]) + 1)
+        index = 3
+        id_lenght = 0
+        while response.css("div.wcpoa_attachment a::attr(href)").re("id=.*")[0][index].isdigit() is True:
+            index += 1
+            id_lenght += 1
+        dots = id_lenght * "."
+        id_to_change = response.css("div.wcpoa_attachment a::attr(href)").re(f"id={dots}")[0][3:]
+        new_id = str(int(response.css("div.wcpoa_attachment a::attr(href)").re(f"id={dots}")[0][3:]) + 1)
         down_link = current_link.replace(id_to_change, new_id).replace("dcdbz6bb06wy1", "4lwl92q9s0axw")
         return down_link
