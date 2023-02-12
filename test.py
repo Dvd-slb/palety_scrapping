@@ -2,6 +2,7 @@ import sqlite3
 import requests
 from dateutil.parser import parse
 from datetime import datetime
+import os
 
 connection = sqlite3.connect("../data.db")
 # connection = sqlite3.connect(":memory:")
@@ -14,13 +15,16 @@ print(len(cursor.fetchall()))
 
 
 # _________ STAŽENÍ SOUBORU Z LINKU Z DATABÁZE ________
+# dir = "C:\\Users\\slabo\\Documents\\Python\\PyCharm\\palety2\\box_description"
+# files_names = os.listdir(dir)
 # cursor.execute("SELECT down_link, name FROM items")
 # for f in cursor.fetchall():
 #     url = f[0]
-#     name = f[1]
-#     file = requests.get(url)
-#     with open(f"../box_description/{name}.xlsx", "wb") as box_details:
-#         box_details.write(file.content)
+#     name = f[1] + ".xlsx"
+#     if not files_names.__contains__(name):
+#         file = requests.get(url)
+#         with open(f"../box_description/{name}", "wb") as box_details:
+#             box_details.write(file.content)
 
 # cursor.execute("SELECT dead_line FROM items")
 # print(type(cursor.fetchone()[0]))
@@ -36,6 +40,13 @@ print(len(cursor.fetchall()))
 
 connection.commit()
 connection.close()
+
+# dir = "C:\\Users\\slabo\\Documents\\Python\\PyCharm\\palety2\\box_description"
+# files = os.listdir(dir)
+# for f in files:
+#     if os.path.isfile(os.path.join(dir, f)):
+#         print(f)
+# print(files)
 
 # cursor.execute("""CREATE TABLE IF NOT EXISTS items(
 #                         id INTEGER PRIMARY KEY,

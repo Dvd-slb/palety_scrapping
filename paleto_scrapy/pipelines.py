@@ -57,13 +57,16 @@ class PaletoScrapyPipeline:
 
 
 # _______________ POSTUP NA STAŽENÍ XLSX SOUBORU S DETAILY JEDNOTLIVÝCH PALET ________________
+# dir = "C:\\Users\\slabo\\Documents\\Python\\PyCharm\\palety2\\box_description"
+# files_names = os.listdir(dir)
 # cursor.execute("SELECT down_link, name FROM items")
 # for f in cursor.fetchall():
 #     url = f[0]
-#     name = f[1]
-#     file = requests.get(url)
-#     with open(f"../box_description/{name}.xlsx", "wb") as box_details:
-#         box_details.write(file.content)
+#     name = f[1] + ".xlsx"
+#     if not files_names.__contains__(name):
+#         file = requests.get(url)
+#         with open(f"../box_description/{name}", "wb") as box_details:
+#             box_details.write(file.content)
 
 
 # _________________________________  PŘEVOD   NA   DATATIME  _________________________________

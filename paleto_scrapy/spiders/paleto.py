@@ -9,14 +9,10 @@ class PaletoSpider(scrapy.Spider):
     start_urls = ['https://paleto.eu/bezici-aukce/']
 
     def parse(self, response, **kwargs):
-
         stage = response.css("div.products-wrapper")
         for box in stage:
             link = box.css("h3 a::attr(href)").get()
             yield response.follow(link, callback=self.detail_parse)
-
-        # link = "https://paleto.eu/a/s1955/"
-        # yield response.follow(link, callback=self.detail_parse)
 
     def detail_parse(self, response):
         items = PaletoScrapyItem()
