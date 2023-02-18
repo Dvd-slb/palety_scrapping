@@ -1,0 +1,11 @@
+- Nějak vymyslet, jak spustit automaticky stahování souboru poté, co se věci uložili do databáze (asi by k tomu mohla posloužit knihovna threading)
+
+- Naučit se s knihovnou pandas a získat z xlsx souborů zbylé údaje
+
+- Tyto údaje přidat do databáze k již existujícím produktům
+
+- Vytáhnout si dead_line a zjistit kolik času zbývá do aukce
+
+- Pokud bude zbývat méně než 1 hodina a max_bid < 10% total_price, tak poslat notifikaci (popř. mail) na telefon s údaji o paletě
+
+- Nějak udělat, aby se tenhle script sám spouštěl (nějak zhruba v 18:00 a v 19:00)

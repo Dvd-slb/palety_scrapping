@@ -15,8 +15,8 @@ print(len(cursor.fetchall()))
 
 
 # _________ STAŽENÍ SOUBORU Z LINKU Z DATABÁZE ________
-# dir = "C:\\Users\\slabo\\Documents\\Python\\PyCharm\\palety2\\box_description"
-# files_names = os.listdir(dir)
+# dr = "C:\\Users\\slabo\\Documents\\Python\\PyCharm\\palety2\\box_description"
+# files_names = os.listdir(dr)
 # cursor.execute("SELECT down_link, name FROM items")
 # for f in cursor.fetchall():
 #     url = f[0]
